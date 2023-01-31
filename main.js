@@ -37,7 +37,7 @@ function displayData()
     var html ="";
     itemList.forEach((element,index) => {
         html+="<tr>";
-        html +="<td>" + index +"</td>";
+        html +="<td>" + (index +1) +"</td>";
         html +="<td>" + element.name +"</td>";
         html +="<td>" + element.price +"</td>";
         html +="<td>" + element.description +"</td>";
@@ -53,22 +53,26 @@ document.onload =displayData();
 
 function addData()
 {
-    if( true)
+    if( validateData() ==true)
     {
         var name =document.getElementById('productName').value;
         var price =document.getElementById('productPrice').value ;
         var description =document.getElementById('productDescription').value;
          var image = document.getElementById("img").files[0];
-      
-        
-        
-        var reader = new FileReader();
          
-             reader.readAsDataURL(image);
+        
+        
+        
          
         
        
-         
+            //  if (image) {
+            //     reader.readAsDataURL(image);
+            // }
+            // else{
+            //     image.css('display', 'none');
+            //     image.attr('src', '');
+            // }
        
 
         
@@ -81,6 +85,13 @@ function addData()
         else{
             itemList = JSON.parse(localStorage.getItem("itemList"));
         }
+         
+           
+
+            if( image != undefined) {
+                var reader = new FileReader();
+         
+        reader.readAsDataURL(image);
         reader.addEventListener('load',()=>{
            
 
@@ -95,8 +106,21 @@ function addData()
             localStorage.setItem('itemList',JSON.stringify(itemList));
             displayData(); 
           })
-            
-       
+            }
+            else{
+                itemList.push({
+                    name:name,
+                    price:price,
+                    description:description,
+                    url : `img/default.jpg`
+                     
+                    
+                });
+        
+                localStorage.setItem('itemList',JSON.stringify(itemList));
+                displayData(); 
+            }
+         
         
         displayData();  
        document.getElementById('productName').value ='';
@@ -152,16 +176,16 @@ function editItem(index)
 
          document.querySelector("#update").onclick =function()
          {
-            if( true)
+            if( validateData() ==true)
             {
                
-                var image = document.getElementById("img").files[0];
+                   var image = document.getElementById("img").files[0];
       
                     let name =document.getElementById('productName').value;
                     let price =document.getElementById('productPrice').value;
                     let description =document.getElementById('productDescription').value;
 
-        
+                    if( image != undefined) {
                 var reader = new FileReader();
                   reader.readAsDataURL(image);
                 reader.addEventListener('load',()=>{
@@ -178,7 +202,19 @@ function editItem(index)
                     displayData();
                   });
            
-             
+                }
+                else{
+                    itemList[index].name =name;
+                    itemList[index].price =price;
+                    itemList[index].description =description;
+                    
+                     
+                        
+                     
+            
+                    localStorage.setItem('itemList',JSON.stringify(itemList));
+                    displayData();
+                }
                 
               document.getElementById('productName').value ='';
               document.getElementById('productPrice').value ='';
