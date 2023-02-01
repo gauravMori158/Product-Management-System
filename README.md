@@ -1,5 +1,5 @@
 # Product-Management-System
-Open it from VS code Live server for faster data retrival
+ 
 1. Add product Id *
 2. Add product name *
 3. Add price *
