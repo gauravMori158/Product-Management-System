@@ -192,7 +192,8 @@ function deleteItem(index)
 
         itemList.splice(index,1);
         localStorage.setItem('itemList',JSON.stringify(itemList));
-         
+        displayData();
+        document.onload =displayData();
 
 }
 
