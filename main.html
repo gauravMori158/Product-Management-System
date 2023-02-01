@@ -15,22 +15,29 @@
 
         <div>
             <form action="#">
+
+              <label for="productName">Product Id</label><br>
+              <input type="text" id="productId" name="productId" placeholder="Product Id.." ><br>
+              <label for="Id" id="pId" style="display: none;"  ></label> 
+              <label for="product ID" id="pid" style="display: none;"></label><br>
               <label for="productName">Product Name</label><br>
+             
               <input type="text" id="productName" name="productName" placeholder="Product Name.."><br>
-          
+              <label for="pNAme" id="pname" style="display: none;"  ></label><br>
               <label for="productPrice">Price</label><br>
               <input type="number" id="productPrice" name="productPrice" placeholder="Price .."><br>
-          
+              <label for="price" id="pPrice" style="display: none;"  ></label><br>
              
               <label for="img">Select image</label><br>
                  <input type="file" id="img" name="img"   ><br>
                  <label for="country">Product Description</label><br>
               <textarea id="productDescription" name="productDescription" rows="4" cols="50" ></textarea><br>
-              <button value="Submit" id="submit" onclick="addData();">Submit</button>
-              <button value="Update" id="update" onclick="updateData();" style="background-color: #d2965a;">Update</button>
+              <button value="Submit" id="submit" onclick="addData();" style="color: white;">Add </button>
+              <button value="Update" id="update" onclick="updateData();" style="color: white;background-color: #0626f6;">Update</button>
             </form>
           </div>
-
+          <button value="Submit" id="sort" onclick="SortData();"> Price</button>
+          <button value="Submit" id="sort" onclick="SortDataByName();"> Name</button>
           <table  id="crudTable">
             <thead>
                 <tr>

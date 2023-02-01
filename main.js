@@ -1,26 +1,71 @@
-function validateData()
+function checkDu(id)
 {
+    var itemList ;
+    let ret =true;
+    if(localStorage.getItem("itemList") == null)
+    {
+        itemList =[];
+        return true;
+    }
+    else{
+        itemList = JSON.parse(localStorage.getItem("itemList"));
+        itemList.forEach((e) => {
+            if(e.productId == id)
+            {   
+                ret =false;
+                return false;
+            }
+        });
+    }
+    return ret;
+}
+
+function validateData()
+{   
     var name =document.getElementById('productName').value;
     var price =document.getElementById('productPrice').value;
-   // var img =document.getElementById('productName').value;
-    //var description =document.getElementById('productDescription').value;
+    let id = document.getElementById('productId').value;
+    
+    
+    if(id == "")
+    {   document.getElementById('pId').style.display='block';
+        document.getElementById('pId').innerHTML ="Product Id is required !!";
+        alert("Product Id is required !!");
+        return false;
+    }
+    
+    if(checkDu(id) == false)
+    { 
+        document.getElementById('pId').style.display='block';
+       document.getElementById('pId').innerHTML ="Product Id must be unique !!";
+       alert("Product Id must be unique  !!");
+       return false;
+    }
 
     if(name == "")
-    {
-        alert ("Product name is required !");
-        return false;
+    {   document.getElementById('pname').style.display='block';
+        document.getElementById('pname').innerHTML ="Plaese enter name !!";
+        alert("Plaese enter name !!");
+     return false;
     }
     if(price == "")
     {
-        alert ("Price is required !");
+        document.getElementById('pPrice').style.display='block';
+        document.getElementById('pPrice').innerHTML =" Price is  required!!"
+        alert("Price is  required !!");
         return false;
     }
     else if(price <1)
     {
-        alert("Price can't be less then 1");
+        
+        document.getElementById('pPrice').style.display='block';
+        document.getElementById('pPrice').innerHTML =" Price can't be less then 1"
+        alert("Price can't be less then 1 !!");
+        return false;
     }
-     
-    return true;
+
+     return true;
+  
 }
 
 function displayData()
@@ -37,7 +82,7 @@ function displayData()
     var html ="";
     itemList.forEach((element,index) => {
         html+="<tr>";
-        html +="<td>" + (index +1) +"</td>";
+        html +="<td>" + (element.productId) +"</td>";
         html +="<td>" + element.name +"</td>";
         html +="<td>" + element.price +"</td>";
         html +="<td>" + element.description +"</td>";
@@ -49,33 +94,18 @@ function displayData()
 
     });
 }
+  
 document.onload =displayData();
-
 function addData()
 {
-    if( validateData() ==true)
+    if( validateData()  )
     {
         var name =document.getElementById('productName').value;
         var price =document.getElementById('productPrice').value ;
         var description =document.getElementById('productDescription').value;
          var image = document.getElementById("img").files[0];
-         
-        
-        
-        
-         
-        
-       
-            //  if (image) {
-            //     reader.readAsDataURL(image);
-            // }
-            // else{
-            //     image.css('display', 'none');
-            //     image.attr('src', '');
-            // }
-       
-
-        
+         var id = document.getElementById('productId').value;
+    
         var itemList ;
 
         if(localStorage.getItem("itemList") == null)
@@ -96,6 +126,7 @@ function addData()
            
 
             itemList.push({
+                productId:id,
                 name:name,
                 price:price,
                 description:description,
@@ -109,6 +140,7 @@ function addData()
             }
             else{
                 itemList.push({
+                    productId:id,
                     name:name,
                     price:price,
                     description:description,
@@ -128,7 +160,8 @@ function addData()
        // var img =document.getElementById('productName').value;
       document.getElementById('productDescription').value='';
     }
-}
+  
+}  document.onload =displayData();
 function deleteItem(index)
 { 
      
@@ -145,7 +178,7 @@ function deleteItem(index)
         itemList.splice(index,1);
         localStorage.setItem('itemList',JSON.stringify(itemList));
          
-displayData();
+document.onload =displayData();
 }
 
 function editItem(index)
@@ -228,4 +261,79 @@ function editItem(index)
             }
          }
 
+}
+let flag =1;
+function SortData()
+{
+    var itemList ;
+
+        if(localStorage.getItem("itemList") == null)
+        {
+            itemList =[];
+        }
+        else{
+            itemList = JSON.parse(localStorage.getItem("itemList"));
+        }
+        if(flag==1)
+        {
+        itemList.sort((a, b) => {
+            return a.price - b.price;
+        });
+        flag =0;
+        }
+        else{
+            itemList.sort((a, b) => {
+                return b.price - a.price;
+            });flag =1;
+        }
+        localStorage.setItem('itemList',JSON.stringify(itemList));
+                    displayData();
+}
+let flag1=0;
+function SortDataByName()
+{
+    var itemList ;
+
+        if(localStorage.getItem("itemList") == null)
+        {
+            itemList =[];
+        }
+        else{
+            itemList = JSON.parse(localStorage.getItem("itemList"));
+        }
+        
+
+        
+       if(flag1==1)
+        {
+            itemList.sort((a, b) => {
+                let fb = a.name.toLowerCase(),
+                    fa = b.name.toLowerCase();
+            
+                if (fa < fb) {
+                    return -1;
+                }
+                if (fa > fb) {
+                    return 1;
+                }
+                return 0;
+            });
+        flag1 =0;
+        }
+        else{
+            itemList.sort((a, b) => {
+                let fa = a.name.toLowerCase(),
+                    fb = b.name.toLowerCase();
+            
+                if (fa < fb) {
+                    return -1;
+                }
+                if (fa > fb) {
+                    return 1;
+                }
+                return 0;
+            });flag1 =1;
+        }
+        localStorage.setItem('itemList',JSON.stringify(itemList));
+          displayData();
 }
