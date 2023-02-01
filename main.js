@@ -30,7 +30,7 @@ function validateData(a)
     if(id == "")
     {   document.getElementById('pId').style.display='block';
         document.getElementById('pId').innerHTML ="Product Id is required !!";
-        alert("Product Id is required !!");
+         alert("Product Id is required !!");
         return false;
     }
     if(a !=1)
@@ -38,21 +38,21 @@ function validateData(a)
     { 
         document.getElementById('pId').style.display='block';
        document.getElementById('pId').innerHTML ="Product Id must be unique !!";
-       alert("Product Id must be unique  !!");
+        alert("Product Id must be unique  !!");
        return false;
     }
 
     if(name == "")
     {   document.getElementById('pname').style.display='block';
         document.getElementById('pname').innerHTML ="Plaese enter name !!";
-        alert("Plaese enter name !!");
+       alert("Plaese enter name !!");
      return false;
     }
     if(price == "")
     {
         document.getElementById('pPrice').style.display='block';
         document.getElementById('pPrice').innerHTML =" Price is  required!!"
-        alert("Price is  required !!");
+     alert("Price is  required !!");
         return false;
     }
     else if(price <1)
@@ -60,7 +60,7 @@ function validateData(a)
         
         document.getElementById('pPrice').style.display='block';
         document.getElementById('pPrice').innerHTML =" Price can't be less then 1"
-        alert("Price can't be less then 1 !!");
+         alert("Price can't be less then 1 !!");
         return false;
     }
 
@@ -108,8 +108,8 @@ function displayData()
 
     });
 }
-  
 document.onload =displayData();
+ 
 function addData()
 {
     if( validateData()  )
@@ -175,7 +175,8 @@ function addData()
       document.getElementById('productDescription').value='';
     }
   
-}  document.onload =displayData();
+}  
+
 function deleteItem(index)
 { 
      
@@ -192,7 +193,7 @@ function deleteItem(index)
         itemList.splice(index,1);
         localStorage.setItem('itemList',JSON.stringify(itemList));
          
-document.onload =displayData();
+
 }
 
 function editItem(index)
@@ -365,9 +366,9 @@ function SearchById()
         itemList = JSON.parse(localStorage.getItem("itemList"));
     }
     let html =``;
-    let flag=0;
+    
     itemList.forEach((element,index)=>{
-        if(id.value == element.productId){
+        if(  element.productId == id.value || element.name.toLowerCase().includes(id.value.toLowerCase())  ){
 
                 console.log(element.productId); 
             html+=` <div class="flex-container" id="displayBlockInner" style="border: 1px solid gray;padding: 20px;">
@@ -392,13 +393,13 @@ function SearchById()
           </div>`;
 
           document.querySelector("#displayBlock").innerHTML =html;
-          flag=1;
+       
            
         }
          
        
         
     });
-        
+
      id.value='';
 }

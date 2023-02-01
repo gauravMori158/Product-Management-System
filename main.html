@@ -19,6 +19,53 @@
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <script>
+    $( function() {
+      var availableTags = [
+        "Cannon Camera",
+        "Apple Phone",
+        "Sport cycle",
+        "Top Bat",
+        "SG Bat",
+        "Flute",
+        "Guitar",
+        "Dell Headphone",
+        "Iphone13 pro",
+        "Iphone13",
+        "Iphone14 pro",
+        "Hp Monitor",
+        "Hp printer",
+        "Iball Projector",
+        "Samsung galaxy s22",
+        "adidas shoe"
+        
+         
+      ];
+      $( "#productName" ).autocomplete({
+        source: availableTags
+      });
+    } );
+
+
+ 
+
+ $( function() {
+  let itemList = JSON.parse(localStorage.getItem("itemList"));
+    let arrayName=[];
+     itemList.forEach((element )=>{
+        arrayName.push(element.name);
+     });
+      $( "#search" ).autocomplete({
+        source: arrayName
+      });
+    } );
+    </script>
 </head>
 
 <body>
@@ -30,13 +77,15 @@
       <div id="div1" style="border:  1px solid gray;">
         <form action="#">
 
-          <label for="productName">Product Id</label><br>
+          <label for="productId">Product Id</label><br>
           <input type="text" id="productId" name="productId" placeholder="Product Id.."><br>
           <label for="Id" id="pId" style="display: none;"></label>
           <label for="product ID" id="pid" style="display: none;"></label><br>
+
           <label for="productName">Product Name</label><br>
 
-          <input type="text" id="productName" name="productName" placeholder="Product Name.."><br>
+          <input class="ui-widget" type="text" id="productName" name="productName" placeholder="Product Name.."><br>
+
           <label for="pNAme" id="pname" style="display: none;"></label><br>
           <label for="productPrice">Price</label><br>
           <input type="number" id="productPrice" name="productPrice" placeholder="Price .."><br>
@@ -58,7 +107,7 @@
 
 
 
-        <div>
+        <div style="top:50%;"> 
           <label for="sort" style="color: rgb(49, 71, 85);margin-left: 20px;">Sort by :</label>
           <button value="Submit" id="sort" onclick="SortDataLower();"><strong> ↓ </strong>Price</button>
           <button value="Submit" id="sort" onclick="SortDataByHigher();"><strong> ↑</strong> Price</button>
@@ -69,7 +118,7 @@
 
         <div style="display: flex;flex-direction: row;margin-right: 40px;">
 
-          <input type="text" name="search" id="search" placeholder="Search By Product Id ..">
+          <input type="text" name="search" id="search" placeholder="Search by product Name or Id ..">
           <button value="Submit" id="sort" onclick="SearchById();">
             <i class="fa fa-search" style="font-size:30px;color: #898bcd" aria-hidden="true"></i></button>
         </div>
@@ -80,11 +129,7 @@
         </div>
 
       </div>
-      <div class="flex-container" id="SearchBlock">
-        <div>
-
-        </div>
-      </div>
+       
     </div>
   </div>
 </body>
