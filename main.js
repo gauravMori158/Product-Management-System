@@ -108,8 +108,8 @@ function displayData()
 
     });
 }
- displayData();
- 
+  
+ document.onload =displayData();
 function addData()
 {
     if( validateData()  )
@@ -278,6 +278,7 @@ function editItem(index)
          }
 
 }
+ displayData();
  
 function SortDataLower()
 {

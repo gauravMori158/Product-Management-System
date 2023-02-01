@@ -20,7 +20,7 @@
     padding: 20px;
       
 }
-input[type=text],input[type=number],textarea,input[type=file] {
+#productId,#productName,input[type=number],textarea,input[type=file] {
     width: 100%;
     padding: 12px 20px;
     margin: 4px 0;
@@ -103,4 +103,13 @@ input[type=text],input[type=number],textarea,input[type=file] {
  #space{
   margin: 10px 0px;
   padding: 10px;
+ }
+ #search{
+  width:250px;
+  padding: 12px 20px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
  }
