@@ -1,6 +1,6 @@
 *{
     font-family :'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif  ;
- 
+    background-color: #f2f2f2; 
   }
   label{
     color: rgb(0, 90, 0);
@@ -8,11 +8,22 @@
   #pname,#pPrice,#pId{
     color: red;
   }
-
+.main{
+   align-items: center;
+    align-items: center;
+    justify-content:center;
+    margin: auto;
+    display: block;
+    box-sizing: border-box;
+    height: auto;   
+    background-color: #f2f2f2;
+    padding: 20px;
+      
+}
 input[type=text],input[type=number],textarea,input[type=file] {
     width: 100%;
     padding: 12px 20px;
-    margin: 8px 0;
+    margin: 4px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -30,16 +41,20 @@ input[type=text],input[type=number],textarea,input[type=file] {
     cursor: pointer;
   }
   
- 
+ form{
+  padding: 20px; 
+  border-radius: 5px;
+ }
   
-  div {
+  div  {
     border-radius: 5px;
     background-color: #f2f2f2;
-    padding: 20px;
+   
   }
   #delete{
      
     background-color: rgb(255, 73, 73);
+    color: #f2f2f2;
   }
 
   #edit{
@@ -49,4 +64,42 @@ input[type=text],input[type=number],textarea,input[type=file] {
     width:fit-content;
     height: fit-content;
   }
-  #
+  #sort{
+    background-color: #f2f2f2;
+  }
+ 
+   
+ 
+ #displayBlock{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 2px;
+  
+ }
+ #displayBlockInner{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  row-gap: 20px;
+   
+    
+ }
+ 
+ #fixsize{
+  width: 170px;
+  height: 170px;
+ }
+ #desc{
+  width: 200px;
+ }
+ #space{
+  margin: 10px 0px;
+  padding: 10px;
+ }

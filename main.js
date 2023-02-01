@@ -20,20 +20,20 @@ function checkDu(id)
     return ret;
 }
 
-function validateData()
+function validateData(a)
 {   
     var name =document.getElementById('productName').value;
     var price =document.getElementById('productPrice').value;
     let id = document.getElementById('productId').value;
     
-    
+    if(a !=1)
     if(id == "")
     {   document.getElementById('pId').style.display='block';
         document.getElementById('pId').innerHTML ="Product Id is required !!";
         alert("Product Id is required !!");
         return false;
     }
-    
+    if(a !=1)
     if(checkDu(id) == false)
     { 
         document.getElementById('pId').style.display='block';
@@ -79,18 +79,32 @@ function displayData()
     else{
         itemList = JSON.parse(localStorage.getItem("itemList"));
     }
-    var html ="";
+    var html =``;
     itemList.forEach((element,index) => {
-        html+="<tr>";
-        html +="<td>" + (element.productId) +"</td>";
-        html +="<td>" + element.name +"</td>";
-        html +="<td>" + element.price +"</td>";
-        html +="<td>" + element.description +"</td>";
-        html += `<td> <img src="${element.url}"></img>`;
-        html +=  `<td> <button id="delete" onclick="deleteItem(${index})"> Delete</button></td>
-        <td> <button id="edit" onclick="editItem(${index})">Edit</button></td>`;
-        html+="</tr>";
-        document.querySelector("#crudTable tbody").innerHTML =html;
+         
+        html +=`
+        <div class="flex-container" id="displayBlockInner" style="border: 1px solid gray;padding: 20px;">
+              <div>
+                  <img id ="fixsize" src="${element.url}" alt="Image Product">
+              </div>
+              <div>
+                <label for="id" style="color: gray;">Pid : ${element.productId}</label>
+              </div>
+              <div>
+                <label for="Name" style="color: rgb(0, 0, 0);"> ${element.name}</label>
+              </div>
+              <div>
+                <label for="price" style="color: green;"> ₹ ${element.price} </label>
+              </div>
+              <div>
+                <label for="description" style="color: gray;" id="desc"  >${element.description}</label>
+              </div>
+                  <div>
+              <button id="delete" onclick="deleteItem(${index} )" style="margin-right: 3px;"> Delete</button>
+              <button id="edit" onclick="editItem( ${index})">Edit</button></div>
+            </div>
+             `;
+        document.querySelector("#displayBlock").innerHTML =html;     
 
     });
 }
@@ -157,7 +171,7 @@ function addData()
         displayData();  
        document.getElementById('productName').value ='';
        document.getElementById('productPrice').value ='';
-       // var img =document.getElementById('productName').value;
+     
       document.getElementById('productDescription').value='';
     }
   
@@ -209,7 +223,7 @@ function editItem(index)
 
          document.querySelector("#update").onclick =function()
          {
-            if( validateData() ==true)
+            if( validateData(1) ==true)
             {
                
                    var image = document.getElementById("img").files[0];
@@ -262,8 +276,8 @@ function editItem(index)
          }
 
 }
-let flag =1;
-function SortData()
+ 
+function SortDataLower()
 {
     var itemList ;
 
@@ -274,22 +288,39 @@ function SortData()
         else{
             itemList = JSON.parse(localStorage.getItem("itemList"));
         }
-        if(flag==1)
-        {
+       
         itemList.sort((a, b) => {
             return a.price - b.price;
         });
-        flag =0;
-        }
-        else{
-            itemList.sort((a, b) => {
-                return b.price - a.price;
-            });flag =1;
-        }
+        
+         
+        
+            
+        
         localStorage.setItem('itemList',JSON.stringify(itemList));
                     displayData();
 }
-let flag1=0;
+
+function SortDataByHigher()
+{  var itemList ;
+
+    if(localStorage.getItem("itemList") == null)
+    {
+        itemList =[];
+    }
+    else{
+        itemList = JSON.parse(localStorage.getItem("itemList"));
+    }
+   
+    itemList.sort((a, b) => {
+    return b.price - a.price;
+}) 
+
+localStorage.setItem('itemList',JSON.stringify(itemList));
+        displayData();
+
+}
+ 
 function SortDataByName()
 {
     var itemList ;
@@ -304,23 +335,7 @@ function SortDataByName()
         
 
         
-       if(flag1==1)
-        {
-            itemList.sort((a, b) => {
-                let fb = a.name.toLowerCase(),
-                    fa = b.name.toLowerCase();
-            
-                if (fa < fb) {
-                    return -1;
-                }
-                if (fa > fb) {
-                    return 1;
-                }
-                return 0;
-            });
-        flag1 =0;
-        }
-        else{
+       
             itemList.sort((a, b) => {
                 let fa = a.name.toLowerCase(),
                     fb = b.name.toLowerCase();
@@ -332,8 +347,7 @@ function SortDataByName()
                     return 1;
                 }
                 return 0;
-            });flag1 =1;
-        }
+            }); 
         localStorage.setItem('itemList',JSON.stringify(itemList));
           displayData();
 }
