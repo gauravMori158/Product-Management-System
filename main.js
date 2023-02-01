@@ -168,7 +168,7 @@ function addData()
             }
          
         
-        displayData();  
+          
        document.getElementById('productName').value ='';
        document.getElementById('productPrice').value ='';
      
