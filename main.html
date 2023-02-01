@@ -53,28 +53,38 @@
       </div>
 
 
-      <div class="flex-container" id="space" style="display:flex;flex-direction: row;justify-content: space-between;border: 1px solid gray;">
-         
-           
-         
-          <div>
-            <label for="sort" style="color: rgb(49, 71, 85);margin-left: 20px;">Sort by :</label>
-              <button value="Submit" id="sort" onclick="SortDataLower();"><strong> ↓ </strong>Price</button>
-              <button value="Submit" id="sort" onclick="SortDataByHigher();"><strong> ↑</strong> Price</button>
+      <div class="flex-container" id="space"
+        style="display:flex;flex-direction: row;justify-content: space-between;border: 1px solid gray;">
 
-              <button value="Submit" id="sort" onclick="SortDataByName();"> Name</button>
-            </div>
-           
-        
-                  <div style="display: flex;flex-direction: column;">
-          
-                     <input type="text"  style="margin-right: 20px;"name="search" id="search" placeholder="Search By Product Id ..">
-                  </div>
+
+
+        <div>
+          <label for="sort" style="color: rgb(49, 71, 85);margin-left: 20px;">Sort by :</label>
+          <button value="Submit" id="sort" onclick="SortDataLower();"><strong> ↓ </strong>Price</button>
+          <button value="Submit" id="sort" onclick="SortDataByHigher();"><strong> ↑</strong> Price</button>
+
+          <button value="Submit" id="sort" onclick="SortDataByName();"> Name</button>
+        </div>
+
+
+        <div style="display: flex;flex-direction: row;margin-right: 40px;">
+
+          <input type="text" name="search" id="search" placeholder="Search By Product Id ..">
+          <button value="Submit" id="sort" onclick="SearchById();">
+            <i class="fa fa-search" style="font-size:30px;color: #898bcd" aria-hidden="true"></i></button>
+        </div>
       </div>
       <div class="flex-container" id="displayBlock" style="border: 1px solid gray;padding: 20px;">
+        <div>
+
+        </div>
 
       </div>
+      <div class="flex-container" id="SearchBlock">
+        <div>
 
+        </div>
+      </div>
     </div>
   </div>
 </body>

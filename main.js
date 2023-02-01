@@ -351,3 +351,54 @@ function SortDataByName()
         localStorage.setItem('itemList',JSON.stringify(itemList));
           displayData();
 }
+function SearchById()
+{
+    let id = document.getElementById('search') ;
+    
+    var itemList ;
+
+    if(localStorage.getItem("itemList") == null)
+    {
+        itemList =[];
+    }
+    else{
+        itemList = JSON.parse(localStorage.getItem("itemList"));
+    }
+    let html =``;
+    let flag=0;
+    itemList.forEach((element,index)=>{
+        if(id.value == element.productId){
+
+                console.log(element.productId); 
+            html+=` <div class="flex-container" id="displayBlockInner" style="border: 1px solid gray;padding: 20px;">
+            <div>
+                <img id ="fixsize" src="${element.url}" alt="Image Product">
+            </div>
+            <div>
+              <label for="id" style="color: gray;">Pid : ${element.productId}</label>
+            </div>
+            <div>
+              <label for="Name" style="color: rgb(0, 0, 0);"> ${element.name}</label>
+            </div>
+            <div>
+              <label for="price" style="color: green;"> ₹ ${element.price} </label>
+            </div>
+            <div>
+              <label for="description" style="color: gray;" id="desc"  >${element.description}</label>
+            </div>
+                <div>
+            <button id="delete" onclick="deleteItem(${index} )" style="margin-right: 3px;"> Delete</button>
+            <button id="edit" onclick="editItem( ${index})">Edit</button></div>
+          </div>`;
+
+          document.querySelector("#displayBlock").innerHTML =html;
+          flag=1;
+           
+        }
+         
+       
+        
+    });
+        
+     id.value='';
+}
