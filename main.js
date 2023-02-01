@@ -100,8 +100,8 @@ function displayData()
                 <label for="description" style="color: gray;" id="desc"  >${element.description}</label>
               </div>
                   <div>
-              <button id="delete" onclick="deleteItem(${index} )" style="margin-right: 3px;"> Delete</button>
-              <button id="edit" onclick="editItem( ${index})">Edit</button></div>
+              <button id="delete"  onclick="deleteItem(${index} )" style="margin-right: 3px;"> Delete</button>
+              <button id="edit"  onclick="editItem( ${index})">Edit</button></div>
             </div>
              `;
         document.querySelector("#displayBlock").innerHTML =html;     
@@ -389,8 +389,8 @@ function SearchById()
               <label for="description" style="color: gray;" id="desc"  >${element.description}</label>
             </div>
                 <div>
-            <button id="delete" onclick="deleteItem(${index} )" style="margin-right: 3px;"> Delete</button>
-            <button id="edit" onclick="editItem( ${index})">Edit</button></div>
+            <button id="delete"  onclick="deleteItem(${index} )" style="margin-right: 3px;"> Delete</button>
+            <button id="edit"  onclick="editItem( ${index})">Edit</button></div>
           </div>`;
 
           document.querySelector("#displayBlock").innerHTML =html;
