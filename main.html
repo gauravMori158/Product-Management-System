@@ -54,10 +54,11 @@
         source: arrayName
       });
     } );
+    displayData();
     </script>
 </head>
 
-<body>
+<body onload="displayData();">
   <div class="newmain">
     <h4 style="text-align: center;color: dodgerblue; "><label for="logo" style="color: dodgerblue;">Product Management
         System !</label></h4>
@@ -67,29 +68,31 @@
         <form action="#">
 
           <label for="productId">Product Id</label><br>
-          <input type="text" id="productId" name="productId" placeholder="Product Id.."><br>
+          <input type="text" id="productId" name="productId" placeholder="Product Id.." required  ><br>
           <label for="Id" id="pId" style="display: none;"></label>
           <label for="product ID" id="pid" style="display: none;"></label><br>
 
           <label for="productName">Product Name</label><br>
 
-          <input class="ui-widget" type="text" id="productName" name="productName" placeholder="Product Name.."><br>
+          <input class="ui-widget" type="text" id="productName" name="productName" placeholder="Product Name.."  required   ><br>
 
           <label for="pNAme" id="pname" style="display: none;"></label><br>
           <label for="productPrice">Price</label><br>
-          <input type="number" id="productPrice" name="productPrice" placeholder="Price .."><br>
+          <input type="number" id="productPrice" name="productPrice" placeholder="Price .."  required  ><br>
           <label for="price" id="pPrice" style="display: none;"></label><br>
 
           <label for="img">Select image</label> <br>
-          <input type="file" id="img" name="img"><br>
+          <input type="file" id="img" name="img"   accept="image/*"  ><br>
           <label for="country">Product Description</label><br>
-          <textarea id="productDescription" name="productDescription" rows="4" cols="50"></textarea><br>
+          <textarea id="productDescription" name="productDescription" rows="4" cols="50" maxlength="88"></textarea><br>
           <button value="Submit" id="submit" onclick="addData();" style="color: white;">Add </button>
-          <button value="Update" id="update" onclick="updateData();"
+          <button value="Update" id="update"  
             style="color: white;background-color: #0626f6;display: none;">Update</button>
         </form>
       </div>
-
+<div id="spanId">
+<span id="disp" style="color:gray"></span>
+</div>
 
       <div class="flex-container" id="space"
         style="display:flex;flex-direction: row;justify-content: space-between;border: 1px solid gray;">

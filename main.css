@@ -89,7 +89,7 @@
   align-items: center;
   text-align: center;
   row-gap: 20px;
-   
+ 
     
  }
  
@@ -99,6 +99,7 @@
  }
  #desc{
   width: 200px;
+  max-width: 220px;
  }
  #space{
   margin: 10px 0px;

@@ -1,73 +1,5 @@
-function checkDu(id)
-{
-    var itemList ;
-    let ret =true;
-    if(localStorage.getItem("itemList") == null)
-    {
-        itemList =[];
-        return true;
-    }
-    else{
-        itemList = JSON.parse(localStorage.getItem("itemList"));
-        itemList.forEach((e) => {
-            if(e.productId == id)
-            {   
-                ret =false;
-                return false;
-            }
-        });
-    }
-    return ret;
-}
-
-function validateData(a)
-{   
-    var name =document.getElementById('productName').value;
-    var price =document.getElementById('productPrice').value;
-    let id = document.getElementById('productId').value;
-    
-    if(a !=1)
-    if(id == "")
-    {   document.getElementById('pId').style.display='block';
-        document.getElementById('pId').innerHTML ="Product Id is required !!";
-         alert("Product Id is required !!");
-        return false;
-    }
-    if(a !=1)
-    if(checkDu(id) == false)
-    { 
-        document.getElementById('pId').style.display='block';
-       document.getElementById('pId').innerHTML ="Product Id must be unique !!";
-        alert("Product Id must be unique  !!");
-       return false;
-    }
-
-    if(name == "")
-    {   document.getElementById('pname').style.display='block';
-        document.getElementById('pname').innerHTML ="Plaese enter name !!";
-       alert("Plaese enter name !!");
-     return false;
-    }
-    if(price == "")
-    {
-        document.getElementById('pPrice').style.display='block';
-        document.getElementById('pPrice').innerHTML =" Price is  required!!"
-     alert("Price is  required !!");
-        return false;
-    }
-    else if(price <1)
-    {
-        
-        document.getElementById('pPrice').style.display='block';
-        document.getElementById('pPrice').innerHTML =" Price can't be less then 1"
-         alert("Price can't be less then 1 !!");
-        return false;
-    }
-
-     return true;
-  
-}
-
+ 
+ 
 function displayData()
 {
     var itemList ;
@@ -108,17 +40,56 @@ function displayData()
 
     });
 }
-  
- document.onload =displayData();
+ 
+document.onload =displayData();
 function addData()
 {
-    if( validateData()  )
+    var name =document.getElementById('productName').value;
+var price =document.getElementById('productPrice').value ;
+var description =document.getElementById('productDescription').value;
+ var image = document.getElementById("img").files[0];
+ var id = document.getElementById('productId').value;
+ var fg=true
+        
+    if(id == "")
+    {   document.getElementById('pId').style.display='block';
+ 
+        document.getElementById('pId').innerHTML ="Product Id is required !!";
+        fg=false;
+    } 
+        
+    
+    
+
+      if(name == "")
+    {   document.getElementById('pname').style.display='block';
+        
+        document.getElementById('pname').innerHTML ="Plaese enter name !!";
+        fg=false;
+      
+    }
+      if(price == "")
     {
-        var name =document.getElementById('productName').value;
-        var price =document.getElementById('productPrice').value ;
-        var description =document.getElementById('productDescription').value;
-         var image = document.getElementById("img").files[0];
-         var id = document.getElementById('productId').value;
+        document.getElementById('pPrice').style.display='block';
+         
+        document.getElementById('pPrice').innerHTML =" Price is  required!!"
+    
+        fg=false;
+    }
+       if(price <1)
+    { document.getElementById('pPrice').style.display='block';
+         
+    document.getElementById('pPrice').innerHTML =" Price must be >1 !!"
+        
+        
+        fg=false;
+        
+    }
+
+ else if( fg)
+    { document.getElementById('pPrice').style.display='none';
+    document.getElementById('pname').style.display='none';
+    document.getElementById('pId').style.display='none';
     
         var itemList ;
 
@@ -147,9 +118,11 @@ function addData()
                 url:reader.result
                 
             });
-    
+           
+            alert("Product "+ name+" Added Successfully !!");
             localStorage.setItem('itemList',JSON.stringify(itemList));
-            displayData(); 
+            displayData();
+           
           })
             }
             else{
@@ -162,21 +135,23 @@ function addData()
                      
                     
                 });
-        
+                
+                alert("Product "+ name+" Added Successfully !!");
                 localStorage.setItem('itemList',JSON.stringify(itemList));
-                displayData(); 
+                displayData();
             }
-         
-        
-          
+           
+           
        document.getElementById('productName').value ='';
        document.getElementById('productPrice').value ='';
      
       document.getElementById('productDescription').value='';
+      displayData();
     }
+    
+    
   
-}  
-
+}   
 function deleteItem(index)
 { 
      
@@ -189,20 +164,21 @@ function deleteItem(index)
         else{
             itemList = JSON.parse(localStorage.getItem("itemList"));
         }
-
+        alert("Product "+itemList[index].name+" Deleted Successfully !!");
         itemList.splice(index,1);
-        localStorage.setItem('itemList',JSON.stringify(itemList));
-        displayData();
          
+        localStorage.setItem('itemList',JSON.stringify(itemList));
+       
+        displayData();
+
 
 }
-
+ 
 function editItem(index)
 {
     document.getElementById('submit').style.display ="none";
     
     document.getElementById('update').style.display ="block";
-
 
     var itemList ;
 
@@ -220,12 +196,55 @@ function editItem(index)
        //  document.getElementById('productName').itemList[index].name;
          document.getElementById('productDescription').value =itemList[index].description;
          
-
-        
-
+         document.getElementById('productId').value=itemList[index].productId;
+          
+          
          document.querySelector("#update").onclick =function()
-         {
-            if( validateData(1) ==true)
+         {        
+            var name =document.getElementById('productName').value;
+            var price =document.getElementById('productPrice').value ;
+             
+            var id = document.getElementById('productId').value;
+            
+            
+            var fg=true
+        
+            if(id == "")
+            {   document.getElementById('pId').style.display='block';
+         
+                document.getElementById('pId').innerHTML ="Product Id is required !!";
+                fg=false;
+            } 
+                
+            
+            
+        
+              if(name == "")
+            {   document.getElementById('pname').style.display='block';
+                
+                document.getElementById('pname').innerHTML ="Plaese enter name !!";
+                fg=false;
+              
+            }
+              if(price == "")
+            {
+                document.getElementById('pPrice').style.display='block';
+                 
+                document.getElementById('pPrice').innerHTML =" Price is  required!!"
+            
+                fg=false;
+            }
+               if(price <1)
+            { document.getElementById('pPrice').style.display='block';
+                 
+            document.getElementById('pPrice').innerHTML =" Price must be >1 !!"
+                
+                
+                fg=false;
+                
+            }
+        
+         else if( fg)
             {
                
                    var image = document.getElementById("img").files[0];
@@ -233,7 +252,7 @@ function editItem(index)
                     let name =document.getElementById('productName').value;
                     let price =document.getElementById('productPrice').value;
                     let description =document.getElementById('productDescription').value;
-
+                    let pid =document.getElementById('productId').value;
                     if( image != undefined) {
                 var reader = new FileReader();
                   reader.readAsDataURL(image);
@@ -244,11 +263,12 @@ function editItem(index)
                     itemList[index].description =description;
                     
                      itemList[index].url= reader.result;
-                        
+                     itemList[index].productId =pid;
                      
-            
+                     alert("Product "+itemList[index].name+" Updated Successfully !!");
                     localStorage.setItem('itemList',JSON.stringify(itemList));
                     displayData();
+                  
                   });
            
                 }
@@ -256,15 +276,16 @@ function editItem(index)
                     itemList[index].name =name;
                     itemList[index].price =price;
                     itemList[index].description =description;
-                    
+                    itemList[index].productId =pid;
                      
-                        
+                    alert("Product "+itemList[index].name+" Updated Successfully !!");
                      
             
                     localStorage.setItem('itemList',JSON.stringify(itemList));
                     displayData();
                 }
                 
+                document.getElementById('productId').value='';
               document.getElementById('productName').value ='';
               document.getElementById('productPrice').value ='';
               // var img =document.getElementById('productName').value;
@@ -275,10 +296,11 @@ function editItem(index)
              document.getElementById('update').style.display ="none";
 
             }
+           
          }
+         displayData();
 
 }
- displayData();
  
 function SortDataLower()
 {
@@ -296,12 +318,12 @@ function SortDataLower()
             return a.price - b.price;
         });
         
-         
+    
         
             
         
         localStorage.setItem('itemList',JSON.stringify(itemList));
-                    displayData();
+        displayData();   
 }
 
 function SortDataByHigher()
@@ -317,10 +339,10 @@ function SortDataByHigher()
    
     itemList.sort((a, b) => {
     return b.price - a.price;
-}) 
+}); 
 
 localStorage.setItem('itemList',JSON.stringify(itemList));
-        displayData();
+displayData();
 
 }
  
@@ -352,7 +374,7 @@ function SortDataByName()
                 return 0;
             }); 
         localStorage.setItem('itemList',JSON.stringify(itemList));
-          displayData();
+        displayData();
 }
 function SearchById()
 {
